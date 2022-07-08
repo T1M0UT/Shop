@@ -1,0 +1,13 @@
+@page
+@model BonsaiShop.Pages.CartModel
+
+@{
+    Layout = "Shared/_Layout";
+}
+
+<div>
+    <p>@Model.Cart.Name</p>
+    <p>@Model.Cart.Price</p>
+    <p>@Model.Cart.Quantity</p>
+    <p>@Model.Cart.StockId</p>
+</div>

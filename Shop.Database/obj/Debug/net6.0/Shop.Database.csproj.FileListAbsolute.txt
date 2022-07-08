@@ -1,0 +1,17 @@
+/Users/tymur/RiderProjects/BonsaiShop/Shop.Database/bin/Debug/net6.0/Shop.Database.deps.json
+/Users/tymur/RiderProjects/BonsaiShop/Shop.Database/bin/Debug/net6.0/Shop.Database.dll
+/Users/tymur/RiderProjects/BonsaiShop/Shop.Database/bin/Debug/net6.0/Shop.Database.pdb
+/Users/tymur/RiderProjects/BonsaiShop/Shop.Database/bin/Debug/net6.0/Shop.Domain.dll
+/Users/tymur/RiderProjects/BonsaiShop/Shop.Database/bin/Debug/net6.0/Shop.Domain.pdb
+/Users/tymur/RiderProjects/BonsaiShop/Shop.Database/obj/Debug/net6.0/Shop.Database.csproj.AssemblyReference.cache
+/Users/tymur/RiderProjects/BonsaiShop/Shop.Database/obj/Debug/net6.0/Shop.Database.GeneratedMSBuildEditorConfig.editorconfig
+/Users/tymur/RiderProjects/BonsaiShop/Shop.Database/obj/Debug/net6.0/Shop.Database.AssemblyInfoInputs.cache
+/Users/tymur/RiderProjects/BonsaiShop/Shop.Database/obj/Debug/net6.0/Shop.Database.AssemblyInfo.cs
+/Users/tymur/RiderProjects/BonsaiShop/Shop.Database/obj/Debug/net6.0/Shop.Database.csproj.CoreCompileInputs.cache
+/Users/tymur/RiderProjects/BonsaiShop/Shop.Database/obj/Debug/net6.0/Shop.Database.csproj.CopyComplete
+/Users/tymur/RiderProjects/BonsaiShop/Shop.Database/obj/Debug/net6.0/Shop.Database.dll
+/Users/tymur/RiderProjects/BonsaiShop/Shop.Database/obj/Debug/net6.0/ref/Shop.Database.dll
+/Users/tymur/RiderProjects/BonsaiShop/Shop.Database/obj/Debug/net6.0/Shop.Database.pdb
+/Users/tymur/RiderProjects/BonsaiShop/Shop.Database/bin/Debug/net6.0/Shop.Database.runtimeconfig.json
+/Users/tymur/RiderProjects/BonsaiShop/Shop.Database/obj/Debug/net6.0/Shop.Database.genruntimeconfig.cache
+/Users/tymur/RiderProjects/BonsaiShop/Shop.Database/obj/Debug/net6.0/refint/Shop.Database.dll
