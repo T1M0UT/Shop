@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Shop.Application.Cart;
-using Shop.Application.Infrastructure;
 using Shop.Application.Orders;
 using Shop.Database;
+using Shop.Domain.Infrastructure;
 using Stripe;
 using GetOrder = Shop.Application.Cart.GetOrder;
 

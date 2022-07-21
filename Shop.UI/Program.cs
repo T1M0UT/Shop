@@ -1,9 +1,8 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Shop.Application.Infrastructure;
-using Shop.Application.UsersAdmin;
 using Shop.Database;
+using Shop.Domain.Infrastructure;
 using Shop.UI.Infrastructure;
 using Stripe;
 

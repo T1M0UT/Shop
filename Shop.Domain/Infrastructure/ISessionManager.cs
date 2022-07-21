@@ -1,6 +1,6 @@
 using Shop.Domain.Models;
 
-namespace Shop.Application.Infrastructure;
+namespace Shop.Domain.Infrastructure;
 
 public interface ISessionManager
 {

@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using Shop.Application.Infrastructure;
 using Shop.Database;
+using Shop.Domain.Infrastructure;
 
 namespace Shop.Application.Cart;
 
