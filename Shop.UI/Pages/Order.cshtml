@@ -1,0 +1,13 @@
+@page "{reference}"
+@model BonsaiShop.Pages.OrderModel
+
+<div>
+    <h1>@Model.Order?.OrderReference</h1> 
+    
+    @foreach (var product in Model.Order?.Products)
+    {
+        <div>
+            @product.Name - @product.Description - @product.Quantity - @product.Price
+        </div>
+    }
+</div>

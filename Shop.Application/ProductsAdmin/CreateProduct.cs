@@ -12,7 +12,7 @@ public class CreateProduct
         _context = context;
     }
 
-    public async Task<Response> Do(Request request)
+    public async Task<Response> DoAsync(Request request)
     {
         var product = new Product()
         {

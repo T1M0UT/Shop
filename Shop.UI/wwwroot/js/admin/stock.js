@@ -16,7 +16,7 @@ var app = new Vue({
     methods: {
         getStock(){
             this.loading = true;
-            axios.get('/Admin/stocks')
+            axios.get('/stocks')
                 .then(res => {
                     console.log(res.data)
                     this.products = res.data;
@@ -30,7 +30,7 @@ var app = new Vue({
         },
         addStock() {
             this.loading = true;
-            axios.post('/Admin/stocks', this.newStock)
+            axios.post('/stocks', this.newStock)
                 .then(res => {
                     console.log(res.data)
                     this.selectedProduct.stock.push(res.data);
@@ -44,7 +44,7 @@ var app = new Vue({
         },
         updateStock() {
             this.loading = true;
-            axios.put('/Admin/stocks', {
+            axios.put('/stocks', {
                 stock: this.selectedProduct.stock.map(x => {
                     return {
                         id: x.id,
@@ -67,7 +67,7 @@ var app = new Vue({
         },
         deleteStock(id, index) {
             this.loading = true;
-            axios.delete('/Admin/stocks/' + id)
+            axios.delete('/stocks/' + id)
                 .then(res => {
                     console.log(res.data)
                     this.selectedProduct.stock.splice(index, 1);

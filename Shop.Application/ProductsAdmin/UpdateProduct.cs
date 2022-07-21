@@ -12,7 +12,7 @@ public class UpdateProduct
         _context = context;
     }
 
-    public async Task<Response> Do(Request request)
+    public async Task<Response> DoAsync(Request request)
     {
         if (request == null)
             throw new ArgumentException("No request found");

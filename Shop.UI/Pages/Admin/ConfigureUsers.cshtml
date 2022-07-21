@@ -1,0 +1,15 @@
+@page
+@model BonsaiShop.Pages.Admin.ConfigureUsersModel
+
+@{
+    Layout = "_AdminLayout";
+}
+
+<div id="app" class="container">
+    <input class="input" v-model="username"/>
+    <button class="button is-success" @@click="createUser()">Create</button>
+</div>
+
+@section Scripts{
+    <script src="~/js/admin/users.js"></script>
+}

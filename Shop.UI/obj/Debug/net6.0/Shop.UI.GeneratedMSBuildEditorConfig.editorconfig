@@ -15,8 +15,32 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = /Users/tymur/RiderProjects/BonsaiShop/Shop.UI
 build_property._RazorSourceGeneratorDebug = 
 
+[/Users/tymur/RiderProjects/BonsaiShop/Shop.UI/Pages/Shared/Components/Cart/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = 
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL0NvbXBvbmVudHMvQ2FydC9EZWZhdWx0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/tymur/RiderProjects/BonsaiShop/Shop.UI/Pages/Shared/Components/Cart/Small.cshtml]
+build_metadata.AdditionalFiles.TargetPath = 
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL0NvbXBvbmVudHMvQ2FydC9TbWFsbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/tymur/RiderProjects/BonsaiShop/Shop.UI/Pages/Accounts/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWNjb3VudHMvTG9naW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/tymur/RiderProjects/BonsaiShop/Shop.UI/Pages/Admin/ConfigureUsers.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWRtaW4vQ29uZmlndXJlVXNlcnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/tymur/RiderProjects/BonsaiShop/Shop.UI/Pages/Admin/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWRtaW4vSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/tymur/RiderProjects/BonsaiShop/Shop.UI/Pages/Admin/OrderManagement.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWRtaW4vT3JkZXJNYW5hZ2VtZW50LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/tymur/RiderProjects/BonsaiShop/Shop.UI/Pages/Admin/Orders.cshtml]
@@ -35,6 +59,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ2FydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/tymur/RiderProjects/BonsaiShop/Shop.UI/Pages/Checkout/CustomerInformation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ2hlY2tvdXQvQ3VzdG9tZXJJbmZvcm1hdGlvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/tymur/RiderProjects/BonsaiShop/Shop.UI/Pages/Checkout/Payment.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ2hlY2tvdXQvUGF5bWVudC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/tymur/RiderProjects/BonsaiShop/Shop.UI/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -43,12 +75,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/tymur/RiderProjects/BonsaiShop/Shop.UI/Pages/Order.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvT3JkZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/tymur/RiderProjects/BonsaiShop/Shop.UI/Pages/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUHJpdmFjeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/tymur/RiderProjects/BonsaiShop/Shop.UI/Pages/Product.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUHJvZHVjdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/tymur/RiderProjects/BonsaiShop/Shop.UI/Pages/Shared/_CartPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL19DYXJ0UGFydGlhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/tymur/RiderProjects/BonsaiShop/Shop.UI/Pages/Shared/_ValidationScriptsPartial.cshtml]

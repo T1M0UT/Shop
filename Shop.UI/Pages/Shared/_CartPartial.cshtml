@@ -1,0 +1,51 @@
+@model IEnumerable<Shop.Application.Cart.GetCart.Response>
+
+
+
+<div class="column is-6 is-offset-3" id="cart-main">
+    <div v-for="(product, id) in products">
+        <div class="level">
+            <div class="level-item">
+                <figure class="image is-128x128">
+                    <img src="~/images/bamboo-pot.jpeg" alt=""/>
+                </figure>
+            </div>
+            <div class="level-item">
+                <p class="title">{{product.name}}</p>
+            </div>
+            <div class="columns is-gapless has-text-centered is-mobile is-multiline">
+                <div class="column is-4">
+                    <button class="button" type="button"
+                            @@click="removeOneFromCart(id)">
+                        -
+                    </button>
+                </div>
+                <div class="column is-4 align-self-center">
+                    {{product.quantity}}
+                </div>
+  
+                <div class="column is-4">
+                    <button class="button" type="button"
+                            @@click="addOneToCart(id)">
+                        +
+                    </button>
+                </div>
+                <div class="column is-12">
+                    <a class="has-text-danger" @@click="removeAllFromCart(id)">
+                        Remove
+                    </a>
+                </div>
+            </div>
+            <div class="level-item">
+                <p>{{product.price}}</p>
+            </div>
+        
+        </div>
+    </div>
+    <div class="has-text-centered">
+        <a asp-page="/Index" class="button is-text">Back To Shop</a>
+        <div v-if="products.length !== 0">
+            <a asp-page="/Checkout/CustomerInformation" class="button is-success">Checkout</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+@page
+@model BonsaiShop.Pages.Accounts.LoginModel
+
+<div class="columns is-mobile">
+    <div class="column is-6">
+        <form method="post">
+            <div class="field">
+                <input class="input" asp-for="Input.Username"/>
+            </div>
+            <div class="field">
+                <input class="input" asp-for="Input.Password"/>
+            </div>
+            <div class="field">
+                <button class="button is-success" type="submit">Sign In</button>
+            </div>
+        </form>
+    </div>
+</div>

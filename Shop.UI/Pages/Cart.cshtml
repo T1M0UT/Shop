@@ -5,9 +5,64 @@
     Layout = "Shared/_Layout";
 }
 
-<div>
-    <p>@Model.Cart.Name</p>
-    <p>@Model.Cart.Price</p>
-    <p>@Model.Cart.Quantity</p>
-    <p>@Model.Cart.StockId</p>
+<div id="app">
+    <div class="container">
+        <div class="columns">
+            <partial name="_CartPartial" model="@Model.Cart" />
+        </div>
+    </div>
 </div>
+
+@section scripts {
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="~/js/cart.js"></script>
+    
+    @* <script> *@
+    @*     var addOneToCart = function (e) { *@
+    @*         var stockId = e.target.dataset.stockId; *@
+    @*         axios.post("/Cart/AddOne/" + stockId) *@
+    @*             .then(res => { *@
+    @*                 updateCart(); *@
+    @*             }) *@
+    @*             .catch(err => { *@
+    @*                 alert(err.error); *@
+    @*             }) *@
+    @*     } *@
+    @*     var removeOneFromCart = function (e) { *@
+    @*         var stockId = e.target.dataset.stockId; *@
+    @*         removeFromCart(stockId, 1); *@
+    @*     } *@
+    @*     var removeAllFromCart = function (e) { *@
+    @*         var stockId = e.target.dataset.stockId; *@
+    @*         var id = "stock-qty-" + stockId; *@
+    @*         var el = document.getElementById(id); *@
+    @*         var qty = parseInt(el.innerText); *@
+    @*         removeFromCart(stockId, qty); *@
+    @*     } *@
+    @*     var removeFromCart = function (stockId, qty) { *@
+    @*         axios.post("/Cart/Remove/" + stockId + '/' + qty) *@
+    @*             .then(res => { *@
+    @*                 updateCart(); *@
+    @*             }) *@
+    @*             .catch(err => { *@
+    @*                 alert(err.error); *@
+    @*             }) *@
+    @*     } *@
+    @*     var updateCart = function () { *@
+    @*         axios.get('/Cart/GetCartComponent') *@
+    @*             .then(res => { *@
+    @*                 var html = res.data; *@
+    @*                 var el = document.getElementById('cart-nav'); *@
+    @*                 el.outerHTML = html; *@
+    @*             }); *@
+    @*         axios.get('/Cart/GetCartMain') *@
+    @*             .then(res => { *@
+    @*                 var html = res.data; *@
+    @*                 var el = document.getElementById('cart-main'); *@
+    @*                 el.outerHTML = html; *@
+    @*             }) *@
+    @*     } *@
+    @* </script> *@
+}

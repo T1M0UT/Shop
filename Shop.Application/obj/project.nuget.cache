@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "UyedR9U6ZRUPvdiozFexioM1/clRgRkyXoUn+TnVyeMV/7/L2/FuxdQcNHQuagoXr5GAI54MXo2477WsWtN98A==",
+  "dgSpecHash": "VJD24kUZagVqt3B8sdwDGHcZdyFqQnomdt4N1dmHdcHn8nbdo5m+l5h0z72+4igwuUBpzQ+G2JbqhD5J5AodHA==",
   "success": true,
   "projectFilePath": "/Users/tymur/RiderProjects/BonsaiShop/Shop.Application/Shop.Application.csproj",
   "expectedPackageFiles": [
@@ -37,7 +37,6 @@
     "/Users/tymur/.nuget/packages/microsoft.netcore.platforms/3.1.0/microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "/Users/tymur/.nuget/packages/microsoft.win32.registry/4.7.0/microsoft.win32.registry.4.7.0.nupkg.sha512",
     "/Users/tymur/.nuget/packages/microsoft.win32.systemevents/4.7.0/microsoft.win32.systemevents.4.7.0.nupkg.sha512",
-    "/Users/tymur/.nuget/packages/newtonsoft.json/13.0.1/newtonsoft.json.13.0.1.nupkg.sha512",
     "/Users/tymur/.nuget/packages/system.collections.immutable/6.0.0/system.collections.immutable.6.0.0.nupkg.sha512",
     "/Users/tymur/.nuget/packages/system.configuration.configurationmanager/4.7.0/system.configuration.configurationmanager.4.7.0.nupkg.sha512",
     "/Users/tymur/.nuget/packages/system.diagnostics.diagnosticsource/6.0.0/system.diagnostics.diagnosticsource.6.0.0.nupkg.sha512",

@@ -1,19 +1,17 @@
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
+using Shop.Application.Infrastructure;
 using Shop.Database;
-using Shop.Domain.Models;
 
 namespace Shop.Application.Cart;
 
 public class GetCart
 {
-    private readonly ISession _session;
+    private readonly ISessionManager _sessionManager;
     private readonly ApplicationDbContext _ctx;
 
-    public GetCart(ISession session, ApplicationDbContext ctx)
+    public GetCart(ISessionManager sessionManager, ApplicationDbContext ctx)
     {
-        _session = session;
+        _sessionManager = sessionManager;
         _ctx = ctx;
     }
 
@@ -21,30 +19,28 @@ public class GetCart
     {
         public string Name { get; set; }
         public string Price { get; set; }
+        public decimal RealPrice { get; set; }
         public int Quantity { get; set; }
         public int StockId { get; set; }
     }
     
-    public Response Do()
+    public IEnumerable<Response> Do()
     {
-        // TODO: Account for multiple items in the cart
-
-        var stringObject =_session.GetString("cart");
-        
-        var cartProduct = JsonConvert.DeserializeObject<CartProduct>(stringObject);
-        
+        var cartList = _sessionManager.GetCart();
         var response = _ctx.Stocks
             .Include(x => x.Product)
-            .Where(x => x.Id == cartProduct.StockId)
+            .ToList()
+            .Where(k => cartList.Any(y => y.StockId == k.Id))
             .Select(x => new Response
             {
                 Name = x.Product.Name,
-                Price = $"$ {x.Product.Price:N2}",
-                Quantity = cartProduct.Quantity,
+                Price = $"${x.Product.Price:N2}",
+                RealPrice = x.Product.Price,
+                Quantity = cartList.FirstOrDefault(y => y.StockId == x.Id).Quantity,
                 StockId = x.Id
             })
-            .FirstOrDefault();
-        
+            .ToList();
+
         return response;
     }
 }

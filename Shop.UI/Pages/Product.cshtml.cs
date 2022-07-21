@@ -18,25 +18,25 @@ public class ProductModel : PageModel
     [BindProperty]
     public AddToCart.Request CartViewModel { get; set; }
 
-    public class Test
-    {
-        public string Id { get; set; }
-    }
-
     public GetProduct.ProductViewModel? Product { get; set; }
+    private string _name { get; set; }
 
-    public IActionResult OnGet(string name)
+    public async Task<IActionResult> OnGet(string name)
     {
-        Product = new GetProduct(_ctx).Do(name.Replace("-", " "));
+        _name = name;
+        Product = await new GetProduct(_ctx).DoAsync(name.Replace("-", " "));
         if (Product is null)
             return RedirectToPage("Index");
         return Page();
     }
 
-    public IActionResult OnPost()
+    public async Task<IActionResult> OnPost([FromServices] AddToCart addToCart)
     {
-        new AddToCart(HttpContext.Session).Do(CartViewModel);
-        
-        return RedirectToPage("Cart");
+        var stockAdded = await addToCart.DoAsync(CartViewModel);
+
+        if (stockAdded)
+            return RedirectToPage("Cart");
+        // TODO: Add a warning
+        return RedirectToAction("OnGet");
     }
 }

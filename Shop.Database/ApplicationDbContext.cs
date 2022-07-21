@@ -12,13 +12,14 @@ public class ApplicationDbContext : IdentityDbContext
     public DbSet<Product> Products { get; set; }
     public DbSet<Stock> Stocks { get; set; }
     public DbSet<Order> Orders { get; set; }
-    public DbSet<OrderProduct> OrderProducts { get; set; }
+    public DbSet<OrderStock> OrderStocks { get; set; }
+    public DbSet<StockOnHold> StocksOnHold { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        modelBuilder.Entity<OrderProduct>()
-            .HasKey(x => new{x.ProductId, x.OrderId});
+        modelBuilder.Entity<OrderStock>()
+            .HasKey(x => new{x.StockId, x.OrderId});
     }
 
 }
