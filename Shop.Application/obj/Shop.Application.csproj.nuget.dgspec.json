@@ -26,62 +26,6 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "/Users/tymur/RiderProjects/BonsaiShop/Shop.Database/Shop.Database.csproj": {
-                "projectPath": "/Users/tymur/RiderProjects/BonsaiShop/Shop.Database/Shop.Database.csproj"
-              }
-            }
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.301/RuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "/Users/tymur/RiderProjects/BonsaiShop/Shop.Database/Shop.Database.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "/Users/tymur/RiderProjects/BonsaiShop/Shop.Database/Shop.Database.csproj",
-        "projectName": "Shop.Database",
-        "projectPath": "/Users/tymur/RiderProjects/BonsaiShop/Shop.Database/Shop.Database.csproj",
-        "packagesPath": "/Users/tymur/.nuget/packages/",
-        "outputPath": "/Users/tymur/RiderProjects/BonsaiShop/Shop.Database/obj/",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "/Users/tymur/.nuget/NuGet/NuGet.Config"
-        ],
-        "originalTargetFrameworks": [
-          "net6.0"
-        ],
-        "sources": {
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
-            "projectReferences": {
               "/Users/tymur/RiderProjects/BonsaiShop/Shop.Domain/Shop.Domain.csproj": {
                 "projectPath": "/Users/tymur/RiderProjects/BonsaiShop/Shop.Domain/Shop.Domain.csproj"
               }
@@ -98,21 +42,9 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+            "System.ComponentModel.Annotations": {
               "target": "Package",
-              "version": "[6.0.6, )"
-            },
-            "Microsoft.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[6.0.6, )"
-            },
-            "Microsoft.EntityFrameworkCore.Design": {
-              "target": "Package",
-              "version": "[6.0.6, )"
-            },
-            "Microsoft.EntityFrameworkCore.SqlServer": {
-              "target": "Package",
-              "version": "[6.0.6, )"
+              "version": "[5.0.0, )"
             }
           },
           "imports": [

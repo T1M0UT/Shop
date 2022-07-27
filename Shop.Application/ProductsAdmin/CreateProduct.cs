@@ -1,15 +1,16 @@
-using Shop.Database;
+using Shop.Domain.Infrastructure;
 using Shop.Domain.Models;
 
 namespace Shop.Application.ProductsAdmin;
 
+[Service]
 public class CreateProduct
 {
-    private ApplicationDbContext _context;
+    private readonly IProductManager _productManager;
 
-    public CreateProduct(ApplicationDbContext context)
+    public CreateProduct(IProductManager productManager)
     {
-        _context = context;
+        _productManager = productManager;
     }
 
     public async Task<Response> DoAsync(Request request)
@@ -20,10 +21,12 @@ public class CreateProduct
             Description = request.Description,
             Price = request.Price
         };
-        
-        _context.Products.Add(product);
-        await _context.SaveChangesAsync();
-        
+
+        if (await _productManager.CreateProduct(product) <= 0)
+        {
+            throw new Exception("Failed to create product");
+        }
+
         return new Response
         {
             Id = product.Id,

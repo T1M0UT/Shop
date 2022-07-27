@@ -1,56 +1,35 @@
-using Shop.Database;
 using Shop.Domain.Infrastructure;
 
 namespace Shop.Application.Cart;
 
+[Service]
 public class RemoveFromCart
 {
     private readonly ISessionManager _sessionManager;
-    private readonly ApplicationDbContext _ctx;
+    private readonly IStockManager _stockManager;
 
-    public RemoveFromCart(ISessionManager sessionManager, ApplicationDbContext ctx)
+    public RemoveFromCart(
+        ISessionManager sessionManager,
+        IStockManager stockManager)
     {
         _sessionManager = sessionManager;
-        _ctx = ctx;
+        _stockManager = stockManager;
     }
 
     public class Request
     {
         public int StockId { get; set; }
         public int Quantity { get; set; }
-        public bool All { get; set; }
     }
 
     public async Task<bool> DoAsync(Request request)
     {
-        var stockOnHold = _ctx.StocksOnHold
-            .FirstOrDefault(x=> x.StockId == request.StockId
-            && x.SessionId == _sessionManager.GetId());
-
-        var stock = _ctx.Stocks.FirstOrDefault(x => x.Id == request.StockId);
-
-        if (stock is null || stockOnHold is null)
+        if (request.Quantity <= 0)
             return false;
-
-        if (request.All)
-        {
-            stock.Quantity += stockOnHold.Quantity;
-            _sessionManager.RemoveProduct(request.StockId, stockOnHold.Quantity);
-            stockOnHold.Quantity = 0;
-        }
-        else
-        {
-            stock.Quantity += request.Quantity;
-            stockOnHold.Quantity -= request.Quantity;
-            _sessionManager.RemoveProduct(request.StockId, request.Quantity);
-        }
-
-        if (stockOnHold.Quantity <= 0)
-        {
-            _ctx.StocksOnHold.Remove(stockOnHold);
-        }
-
-        await _ctx.SaveChangesAsync();
+        
+        await _stockManager.RemoveStockFromHold(request.StockId, request.Quantity, _sessionManager.GetId());
+        
+        _sessionManager.RemoveProduct(request.StockId, request.Quantity);
 
         return true;
     }

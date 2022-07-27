@@ -10,7 +10,7 @@
         <div class="column is-3">
             <table class="table">
                 <tr v-for="product in products" @@click="selectProduct(product)">
-                    <td>{{product.description}}</td>
+                    <td>{{product.name}} {{product.description}}</td>
                 </tr>
             </table>
         </div>

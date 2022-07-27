@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "HK2jsVMDPiagxImxYdrLyiw4X8hvwk30bxKAs40fkdE=",
+  "Hash": "QFCGRmRYTaMF38EJa+79ECHWqvh9+y5xkioJUhhMznc=",
   "Source": "Shop.UI",
   "BasePath": "_content/Shop.UI",
   "Mode": "Default",
@@ -1411,6 +1411,23 @@
       "OriginalItemSpec": "wwwroot/lib/.DS_Store"
     },
     {
+      "Identity": "/Users/tymur/RiderProjects/BonsaiShop/Shop.UI/wwwroot/lib/axios/axios.min.js",
+      "SourceId": "Shop.UI",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/tymur/RiderProjects/BonsaiShop/Shop.UI/wwwroot/",
+      "BasePath": "_content/Shop.UI",
+      "RelativePath": "lib/axios/axios.min.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/lib/axios/axios.min.js"
+    },
+    {
       "Identity": "/Users/tymur/RiderProjects/BonsaiShop/Shop.UI/wwwroot/lib/bulma/bulma.sass",
       "SourceId": "Shop.UI",
       "SourceType": "Discovered",
@@ -2667,6 +2684,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/lib/bulma/sass/utilities/mixins.sass"
+    },
+    {
+      "Identity": "/Users/tymur/RiderProjects/BonsaiShop/Shop.UI/wwwroot/lib/vue/vue.js",
+      "SourceId": "Shop.UI",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/tymur/RiderProjects/BonsaiShop/Shop.UI/wwwroot/",
+      "BasePath": "_content/Shop.UI",
+      "RelativePath": "lib/vue/vue.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/lib/vue/vue.js"
     }
   ]
 }

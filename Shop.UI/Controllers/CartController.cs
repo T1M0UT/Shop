@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Shop.Application.Cart;
-using Shop.Database;
+
+using Shop.Domain.Infrastructure;
 
 namespace BonsaiShop.Controllers;
 
@@ -53,7 +54,7 @@ public class CartController : Controller
     {
         var totalValue = getCart.Do().Sum(x => x.RealPrice * x.Quantity);
 
-        return PartialView("Components/Cart/Small", $"${totalValue}");
+        return PartialView("Components/Cart/Small", totalValue.GetPriceString());
     }
     
     [HttpGet]

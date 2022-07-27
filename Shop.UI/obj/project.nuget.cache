@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Dh0NJZYZfBetw+RRkyiLIVoOro66Yj+yfZN/H/STTwtOROJuSreuPtrSvs5sLLr5ac355vrrMG9wRoY7B/nqLQ==",
+  "dgSpecHash": "nS0OiF1ge6LhcLvzUi69SpecY8V9bvbGYhVh8rBaT8ymxHECuupPEGVUPhMcZtnrZzCDdFNwfuLrufY+xM2SAg==",
   "success": true,
   "projectFilePath": "/Users/tymur/RiderProjects/BonsaiShop/Shop.UI/Shop.UI.csproj",
   "expectedPackageFiles": [
@@ -109,6 +109,7 @@
     "/Users/tymur/.nuget/packages/system.collections/4.3.0/system.collections.4.3.0.nupkg.sha512",
     "/Users/tymur/.nuget/packages/system.collections.concurrent/4.3.0/system.collections.concurrent.4.3.0.nupkg.sha512",
     "/Users/tymur/.nuget/packages/system.collections.immutable/6.0.0/system.collections.immutable.6.0.0.nupkg.sha512",
+    "/Users/tymur/.nuget/packages/system.componentmodel.annotations/5.0.0/system.componentmodel.annotations.5.0.0.nupkg.sha512",
     "/Users/tymur/.nuget/packages/system.composition/1.0.31/system.composition.1.0.31.nupkg.sha512",
     "/Users/tymur/.nuget/packages/system.composition.attributedmodel/1.0.31/system.composition.attributedmodel.1.0.31.nupkg.sha512",
     "/Users/tymur/.nuget/packages/system.composition.convention/1.0.31/system.composition.convention.1.0.31.nupkg.sha512",

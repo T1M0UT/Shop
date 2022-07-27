@@ -1,24 +1,24 @@
-using Shop.Database;
+using Shop.Domain.Infrastructure;
 
 
 namespace Shop.Application.ProductsAdmin;
 
+[Service]
 public class UpdateProduct
 {
-    private ApplicationDbContext _context;
+    private readonly IProductManager _productManager;
 
-    public UpdateProduct(ApplicationDbContext context)
+    public UpdateProduct(IProductManager productManager)
     {
-        _context = context;
+        _productManager = productManager;
     }
 
     public async Task<Response> DoAsync(Request request)
     {
         if (request == null)
             throw new ArgumentException("No request found");
-        
-        var product = _context.Products
-            .FirstOrDefault(p => p.Id == request.Id);
+
+        var product = _productManager.GetProductById(request.Id, x => x);
 
         if (product == null)
             throw new ArgumentException("No product found");
@@ -26,8 +26,8 @@ public class UpdateProduct
         product.Name = request.Name;
         product.Description = request.Description;
         product.Price = request.Price;
-        
-        await _context.SaveChangesAsync();
+
+        await _productManager.UpdateProduct(product);
         
         return new Response
         {

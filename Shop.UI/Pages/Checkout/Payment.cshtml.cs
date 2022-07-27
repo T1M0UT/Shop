@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Shop.Application.Cart;
 using Shop.Application.Orders;
-using Shop.Database;
+
 using Shop.Domain.Infrastructure;
 using Stripe;
 using GetOrder = Shop.Application.Cart.GetOrder;
@@ -12,12 +12,10 @@ namespace BonsaiShop.Pages.Checkout;
 public class PaymentModel : PageModel
 {
     public string PublicKey { get; set; }
-    private readonly ApplicationDbContext _ctx;
 
-    public PaymentModel(IConfiguration config, ApplicationDbContext ctx)
+    public PaymentModel(IConfiguration config)
     {
         PublicKey = config["Stripe:PublicKey"];
-        _ctx = ctx;
     }
 
     public IActionResult OnGet(
@@ -37,6 +35,7 @@ public class PaymentModel : PageModel
         string stripeEmail,
         string stripeToken,
         [FromServices] GetOrder getOrder,
+        [FromServices] CreateOrder createOrder,
         [FromServices] ISessionManager sessionManager)
     {
         var customers = new CustomerService();
@@ -60,7 +59,7 @@ public class PaymentModel : PageModel
 
         var sessionId = HttpContext.Session.Id;
 
-        await new CreateOrder(_ctx).DoAsync(new CreateOrder.Request
+        await createOrder.DoAsync(new CreateOrder.Request
         {
             StripeReference = charge.Id,
             SessionId = sessionId,

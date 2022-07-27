@@ -1,15 +1,15 @@
-using Microsoft.EntityFrameworkCore;
-using Shop.Database;
+using Shop.Domain.Infrastructure;
 
 namespace Shop.Application.Orders;
 
+[Service]
 public class GetOrder
 {
-    private readonly ApplicationDbContext _ctx;
+    private readonly IOrderManager _orderManager;
 
-    public GetOrder(ApplicationDbContext ctx)
+    public GetOrder(IOrderManager orderManager)
     {
-        _ctx = ctx;
+        _orderManager = orderManager;
     }
 
     public class Response
@@ -40,16 +40,14 @@ public class GetOrder
         public string StockDescription { get; set; }
     }
 
-    public Response? Do(string reference) => 
-        _ctx.Orders
-            .Where(x => x.OrderReference == reference)
-            .Include(x => x.OrderStocks)
-            .ThenInclude(x => x.Stock)
-            .ThenInclude(x => x.Product)
-            .Select(x => new Response
+    public Response? Do(string reference)
+    {
+        return _orderManager.GetOrderByReference(
+            reference, 
+            x => new Response
             {
                 OrderReference = x.OrderReference,
-            
+
                 FirstName = x.FirstName,
                 LastName = x.LastName,
                 Email = x.Email,
@@ -58,17 +56,17 @@ public class GetOrder
                 Address2 = x.Address2,
                 City = x.City,
                 PostCode = x.PostCode,
-                
+
                 Products = x.OrderStocks.Select(y => new Product
                 {
                     Name = y.Stock.Product.Name,
                     Description = y.Stock.Product.Description,
-                    Price = $"$ {y.Stock.Product.Price:N2}",
+                    Price = y.Stock.Product.Price.GetPriceString(),
                     Quantity = y.Quantity,
                     StockDescription = y.Stock.Description
                 }),
-                
+
                 TotalValue = $"$ {x.OrderStocks.Sum(y => y.Stock.Product.Price):N2}"
-            })
-            .FirstOrDefault();
+            });
+    }
 }

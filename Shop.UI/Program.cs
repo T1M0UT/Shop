@@ -51,7 +51,6 @@ builder.Services.AddSession(options =>
     options.Cookie.MaxAge = TimeSpan.FromMinutes(20);
 });
 
-builder.Services.AddTransient<ISessionManager, SessionManager>();
 
 StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
 

@@ -1,22 +1,21 @@
-using Shop.Database;
-using Shop.Domain.Models;
+using Shop.Domain.Infrastructure;
 
 namespace Shop.Application.ProductsAdmin;
 
+[Service]
 public class DeleteProduct
 {
-    private ApplicationDbContext _context;
+    private readonly IProductManager _productManager;
 
-    public DeleteProduct(ApplicationDbContext context)
+    public DeleteProduct(IProductManager productManager)
     {
-        _context = context;
+        _productManager = productManager;
     }
 
     public async Task<bool> DoAsync(int id)
     {
-        var product = _context.Products.FirstOrDefault(x => x.Id == id);
-        _context.Products.Remove(product);
-        await _context.SaveChangesAsync();
+        if (await _productManager.DeleteProductById(id) <= 0)
+            throw new Exception("Failed to delete product");
 
         return true;
     }

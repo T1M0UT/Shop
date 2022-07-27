@@ -1,26 +1,26 @@
-using Shop.Database;
+using Shop.Domain.Infrastructure;
 
 namespace Shop.Application.ProductsAdmin;
 
+[Service]
 public class GetProduct
 {
-    private readonly ApplicationDbContext _ctx;
+    private readonly IProductManager _productManager;
 
-    public GetProduct(ApplicationDbContext ctx)
+    public GetProduct(IProductManager productManager)
     {
-        _ctx = ctx;
+        _productManager = productManager;
     }
 
     public ProductViewModel? Do(int id) =>
-        _ctx.Products.ToList().Where(x => x.Id == id).Select(p => new ProductViewModel
-            {
-                Id = p.Id,
-                Name = p.Name,
-                Description = p.Description,
-                Price = p.Price
-            })
-            .FirstOrDefault();
-    
+        _productManager.GetProductById(id, p => new ProductViewModel
+        {
+            Id = p.Id,
+            Name = p.Name,
+            Description = p.Description,
+            Price = p.Price
+        });
+
     public class ProductViewModel
     {
         public int Id { get; set; }

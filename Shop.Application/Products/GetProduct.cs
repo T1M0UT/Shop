@@ -1,54 +1,38 @@
-using Microsoft.EntityFrameworkCore;
-using Shop.Database;
+using Shop.Domain.Infrastructure;
 
 namespace Shop.Application.Products;
 
+[Service]
 public class GetProduct
 {
-    private readonly ApplicationDbContext _ctx;
+    private readonly IStockManager _stockManager;
+    private readonly IProductManager _productManager;
 
-    public GetProduct(ApplicationDbContext ctx)
+    public GetProduct(
+        IStockManager stockManager,
+        IProductManager productManager)
     {
-        _ctx = ctx;
+        _stockManager = stockManager;
+        _productManager = productManager;
     }
 
     public async Task<ProductViewModel?> DoAsync(string name)
     {
-        var stocksOnHold = _ctx.StocksOnHold.ToList().Where(x => x.ExpiryDate < DateTime.Now).ToList();
+        await _stockManager.RetrieveExpiredStockOnHold();
 
-        if (stocksOnHold.Count > 0)
+        return _productManager.GetProductByName(name, p => new ProductViewModel
         {
-            var stockToReturn = _ctx.Stocks
-                .ToList()
-                .Where(x => stocksOnHold.Any(y => y.StockId == x.Id))
-                .ToList();
+            Name = p.Name,
+            Description = p.Description,
+            Price = p.Price.GetPriceString(),
 
-            foreach (var stock in stockToReturn)
+            Stock = p.Stock.Select(y => new StockViewModel
             {
-                stock.Quantity += stocksOnHold.FirstOrDefault(x => x.StockId == stock.Id)!.Quantity;
-            }
-            
-            _ctx.StocksOnHold.RemoveRange(stocksOnHold);
-
-            await _ctx.SaveChangesAsync();
-        }
-        
-        return _ctx.Products
-            .Include(x => x.Stock)
-            .Where(x => x.Name == name).Select(p => new ProductViewModel
-            {
-                Name = p.Name,
-                Description = p.Description,
-                Price = $"${p.Price:N2}",
-
-                Stock = p.Stock.Select(y => new StockViewModel
-                {
-                    Id = y.Id,
-                    Description = y.Description,
-                    Quantity = y.Quantity
-                })
+                Id = y.Id,
+                Description = y.Description,
+                Quantity = y.Quantity
             })
-            .FirstOrDefault();
+        });
     }
 
     public class ProductViewModel

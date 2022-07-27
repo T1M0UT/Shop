@@ -21,11 +21,11 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Shop.Application\Shop.Application.csproj" />
+      <ProjectReference Include="..\Shop.Database\Shop.Database.csproj" />
     </ItemGroup>
 
     <ItemGroup>
       <Folder Include="wwwroot\images" />
-      <Folder Include="wwwroot\lib" />
     </ItemGroup>
 
     <ItemGroup>

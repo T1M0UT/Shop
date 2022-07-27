@@ -1,18 +1,15 @@
-using Microsoft.EntityFrameworkCore;
-using Shop.Database;
 using Shop.Domain.Infrastructure;
 
 namespace Shop.Application.Cart;
 
+[Service]
 public class GetCart
 {
     private readonly ISessionManager _sessionManager;
-    private readonly ApplicationDbContext _ctx;
 
-    public GetCart(ISessionManager sessionManager, ApplicationDbContext ctx)
+    public GetCart(ISessionManager sessionManager)
     {
         _sessionManager = sessionManager;
-        _ctx = ctx;
     }
 
     public class Response
@@ -26,21 +23,14 @@ public class GetCart
     
     public IEnumerable<Response> Do()
     {
-        var cartList = _sessionManager.GetCart();
-        var response = _ctx.Stocks
-            .Include(x => x.Product)
-            .ToList()
-            .Where(k => cartList.Any(y => y.StockId == k.Id))
-            .Select(x => new Response
-            {
-                Name = x.Product.Name,
-                Price = $"${x.Product.Price:N2}",
-                RealPrice = x.Product.Price,
-                Quantity = cartList.FirstOrDefault(y => y.StockId == x.Id).Quantity,
-                StockId = x.Id
-            })
-            .ToList();
-
-        return response;
+        return _sessionManager
+            .GetCart(x => new Response
+        {
+            Name = x.ProductName,
+            Price = x.Price.GetPriceString(),
+            RealPrice = x.Price,
+            Quantity = x.Quantity,
+            StockId = x.StockId
+        });
     }
 }

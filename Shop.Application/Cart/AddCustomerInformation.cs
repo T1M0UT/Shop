@@ -4,6 +4,7 @@ using Shop.Domain.Models;
 
 namespace Shop.Application.Cart;
 
+[Service]
 public class AddCustomerInformation
 {
     private readonly ISessionManager _sessionManager;

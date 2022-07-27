@@ -26,8 +26,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "/Users/tymur/RiderProjects/BonsaiShop/Shop.Database/Shop.Database.csproj": {
-                "projectPath": "/Users/tymur/RiderProjects/BonsaiShop/Shop.Database/Shop.Database.csproj"
+              "/Users/tymur/RiderProjects/BonsaiShop/Shop.Domain/Shop.Domain.csproj": {
+                "projectPath": "/Users/tymur/RiderProjects/BonsaiShop/Shop.Domain/Shop.Domain.csproj"
               }
             }
           }
@@ -41,6 +41,12 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "System.ComponentModel.Annotations": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -210,6 +216,9 @@
             "projectReferences": {
               "/Users/tymur/RiderProjects/BonsaiShop/Shop.Application/Shop.Application.csproj": {
                 "projectPath": "/Users/tymur/RiderProjects/BonsaiShop/Shop.Application/Shop.Application.csproj"
+              },
+              "/Users/tymur/RiderProjects/BonsaiShop/Shop.Database/Shop.Database.csproj": {
+                "projectPath": "/Users/tymur/RiderProjects/BonsaiShop/Shop.Database/Shop.Database.csproj"
               }
             }
           }

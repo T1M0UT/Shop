@@ -13,6 +13,7 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.6",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.6",
           "Shop.Application": "1.0.0",
+          "Shop.Database": "1.0.0",
           "Stripe.net": "39.122.0"
         },
         "runtime": {
@@ -1567,6 +1568,7 @@
           "System.Runtime.CompilerServices.Unsafe": "6.0.0"
         }
       },
+      "System.ComponentModel.Annotations/5.0.0": {},
       "System.Composition/1.0.31": {
         "dependencies": {
           "System.Composition.AttributedModel": "1.0.31",
@@ -2309,7 +2311,8 @@
       },
       "Shop.Application/1.0.0": {
         "dependencies": {
-          "Shop.Database": "1.0.0"
+          "Shop.Domain": "1.0.0",
+          "System.ComponentModel.Annotations": "5.0.0"
         },
         "runtime": {
           "Shop.Application.dll": {}
@@ -3074,6 +3077,13 @@
       "sha512": "sha512-l4zZJ1WU2hqpQQHXz1rvC3etVZN+2DLmQMO79FhOTZHMn8tDRr+WU287sbomD0BETlmKDn0ygUgVy9k5xkkJdA==",
       "path": "system.collections.immutable/6.0.0",
       "hashPath": "system.collections.immutable.6.0.0.nupkg.sha512"
+    },
+    "System.ComponentModel.Annotations/5.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-dMkqfy2el8A8/I76n2Hi1oBFEbG1SfxD2l5nhwXV3XjlnOmwxJlQbYpJH4W51odnU9sARCSAgv7S3CyAFMkpYg==",
+      "path": "system.componentmodel.annotations/5.0.0",
+      "hashPath": "system.componentmodel.annotations.5.0.0.nupkg.sha512"
     },
     "System.Composition/1.0.31": {
       "type": "package",

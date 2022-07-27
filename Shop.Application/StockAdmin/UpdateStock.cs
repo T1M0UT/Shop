@@ -1,15 +1,16 @@
-using Shop.Database;
+using Shop.Domain.Infrastructure;
 using Shop.Domain.Models;
 
 namespace Shop.Application.StockAdmin;
 
+[Service]
 public class UpdateStock
 {
-    private readonly ApplicationDbContext _ctx;
+    private readonly IStockManager _stockManager;
 
-    public UpdateStock(ApplicationDbContext ctx)
+    public UpdateStock(IStockManager stockManager)
     {
-        _ctx = ctx;
+        _stockManager = stockManager;
     }
 
     public async Task<Response> DoAsync(Request request)
@@ -21,10 +22,10 @@ public class UpdateStock
                 Description = stock.Description,
                 Quantity = stock.Quantity,
                 ProductId = stock.ProductId
-            });
+            })
+            .ToList();
 
-        _ctx.Stocks.UpdateRange(stocks);
-        await _ctx.SaveChangesAsync();
+        await _stockManager.UpdateStockRange(stocks);
 
         return new Response
         {

@@ -1,9 +1,8 @@
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Shop.Application.ProductsAdmin;
-using Shop.Application.StockAdmin;
-using Shop.Application.UsersAdmin;
-using Shop.Database;
+using Shop.UI.ViewModels.Admin;
 
 namespace BonsaiShop.Controllers;
 
@@ -11,17 +10,60 @@ namespace BonsaiShop.Controllers;
 [Authorize(Policy = "Admin")]
 public class UsersController : Controller
 {
-    private readonly CreateUser _createUser;
+    private readonly UserManager<IdentityUser> _userManager;
 
-    public UsersController(CreateUser createUser)
+    public UsersController(UserManager<IdentityUser> userManager)
     {
-        _createUser = createUser;
+        _userManager = userManager;
     }
 
-    public async Task<IActionResult> CreateUser([FromBody] CreateUser.Request request)
+    [HttpGet("")]
+    public async Task<IActionResult> GetUsers()
     {
-        await _createUser.DoAsync(request);
+        var users = await _userManager.GetUsersForClaimAsync(new Claim("Role", "Manager"));
+        return Ok(users);
+    }
+
+    [HttpPost("")]
+    public async Task<IActionResult> CreateUser(
+        [FromBody] CreateUserViewModel vm)
+    {
+        var managerUser = new IdentityUser
+        {
+            UserName = vm.Username
+        };
+
+        var result = await _userManager.CreateAsync(managerUser, vm.Password);
+        if (!result.Succeeded)
+        {
+            return BadRequest(result.Errors);
+        }
         
-        return Ok();
+        var managerClaim = new Claim("Role", "Manager");
+        
+        var result2 = await _userManager.AddClaimAsync(managerUser, managerClaim);
+        if (!result2.Succeeded)
+        {
+            return BadRequest(result2.Errors);
+        }
+        
+        return Ok(managerUser);
+    }
+    
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteUser(string id)
+    {
+        var user = await _userManager.FindByIdAsync(id);
+        
+        if (user == null)
+            return BadRequest("User not found");
+        
+        var deletionResult = await _userManager.DeleteAsync(user);
+
+        // var result = await _userManager.RemoveClaimAsync(
+        //     user,
+        //     new Claim("Role", "Manager"));
+        
+        return Ok(deletionResult);
     }
 }

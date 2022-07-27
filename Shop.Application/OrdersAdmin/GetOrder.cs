@@ -1,17 +1,15 @@
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using Shop.Database;
-using Shop.Domain.Enums;
+using Shop.Domain.Infrastructure;
 
 namespace Shop.Application.OrdersAdmin;
 
+[Service]
 public class GetOrder
 {
-    private readonly ApplicationDbContext _ctx;
+    private readonly IOrderManager _orderManager;
 
-    public GetOrder(ApplicationDbContext ctx)
+    public GetOrder(IOrderManager orderManager)
     {
-        _ctx = ctx;
+        _orderManager = orderManager;
     }
 
     public class Response
@@ -40,20 +38,15 @@ public class GetOrder
         public int Quantity { get; set; }
         public string StockDescription { get; set; }
     }
-    
+
     public Response? Do(int id) =>
-        _ctx.Orders 
-            .Include(x => x.OrderStocks)
-            .ThenInclude(x => x.Stock)
-            .ThenInclude(x => x.Product)
-            .ToList()
-            .Where(x => x.Id == id)
-            .Select(x => new Response
+        _orderManager.GetOrderById(id,
+            x => new Response
             {
                 Id = x.Id,
                 OrderReference = x.OrderReference,
                 StripeReference = x.StripeReference,
-                
+
                 FirstName = x.FirstName,
                 LastName = x.LastName,
                 Email = x.Email,
@@ -62,7 +55,7 @@ public class GetOrder
                 Address2 = x.Address2,
                 City = x.City,
                 PostCode = x.PostCode,
-                
+
                 Products = x.OrderStocks.ToList().Select(y => new Product
                 {
                     Name = y.Stock.Product.Name,
@@ -70,6 +63,5 @@ public class GetOrder
                     Quantity = y.Quantity,
                     StockDescription = y.Stock.Description,
                 }),
-            })
-            .FirstOrDefault();
+            });
 }

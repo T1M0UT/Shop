@@ -1,18 +1,15 @@
-using Microsoft.EntityFrameworkCore;
-using Shop.Database;
 using Shop.Domain.Infrastructure;
 
 namespace Shop.Application.Cart;
 
+[Service]
 public class GetOrder
 {
     private readonly ISessionManager _sessionManager;
-    private readonly ApplicationDbContext _ctx;
 
-    public GetOrder(ISessionManager sessionManager, ApplicationDbContext ctx)
+    public GetOrder(ISessionManager sessionManager)
     {
         _sessionManager = sessionManager;
-        _ctx = ctx;
     }
 
     public class Response
@@ -49,19 +46,15 @@ public class GetOrder
     {
         // TODO: Account for multiple items in the cart
 
-        var cartList = _sessionManager.GetCart();
-        
-        var products = _ctx.Stocks
-            .Include(x => x.Product)
-            .ToList()
-            .Where(x => cartList.Any(y => y.StockId == x.Id))
-            .Select(x => new Product
-            {
-                ProductId = x.ProductId,
-                StockId = x.Id,
-                Price = (int)(x.Product.Price * 100),
-                Quantity = cartList.FirstOrDefault(y => y.StockId == x.Id).Quantity
-            });
+        var products = _sessionManager
+            .GetCart(x => new Product
+        {
+            ProductId = x.ProductId,
+            StockId = x.StockId,
+            Price = (int)(x.Price * 100),
+            Quantity = x.Quantity
+        });
+
 
         var customerInformation = _sessionManager.GetCustomerInformation();
 

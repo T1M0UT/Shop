@@ -48,7 +48,7 @@ var app = new Vue({
                 stock: this.selectedProduct.stock.map(x => {
                     return {
                         id: x.id,
-                        productId: this.selectProduct.id,
+                        productId: this.selectedProduct.id,
                         description: x.description,
                         quantity: x.quantity
                     }

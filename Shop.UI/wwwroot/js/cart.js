@@ -3,6 +3,13 @@ var app = new Vue({
     data:{
         products: [],
     },
+    computed:{
+        totalPrice() {
+            return this.products.reduce(function (sum, current) {
+                return sum + current.price;
+            }, 0);
+        }
+    },
     mounted() {
         this.getCart()
     },

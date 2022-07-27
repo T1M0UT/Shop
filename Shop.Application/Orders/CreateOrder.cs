@@ -1,17 +1,21 @@
-using Shop.Database;
+using Shop.Domain.Infrastructure;
 using Shop.Domain.Models;
 
 namespace Shop.Application.Orders;
 
+[Service]
 public class CreateOrder
 {
-    private readonly ApplicationDbContext _ctx;
+    private readonly IOrderManager _orderManager;
+    private readonly IStockManager _stockManager;
 
-    public CreateOrder(ApplicationDbContext ctx)
+    public CreateOrder(
+        IOrderManager orderManager,
+        IStockManager stockManager)
     {
-        _ctx = ctx;
+        _orderManager = orderManager;
+        _stockManager = stockManager;
     }
-
     public class Request
     {
         public string StripeReference { get; set; }
@@ -37,13 +41,6 @@ public class CreateOrder
     
     public async Task<bool> DoAsync(Request request)
     {
-        var stockOnHold = _ctx.StocksOnHold
-            .ToList()
-            .Where(x => x.SessionId == request.SessionId)
-            .ToList();
-        
-        _ctx.StocksOnHold.RemoveRange(stockOnHold);
-
         var order = new Order
         {
             OrderReference = CreateOrderReference(),
@@ -65,9 +62,16 @@ public class CreateOrder
             }).ToList()
         };
 
-        _ctx.Orders.Add(order);
+        var success = await _orderManager.CreateOrder(order) > 0;
 
-        return await _ctx.SaveChangesAsync() > 0;
+        if (success)
+        {
+            await _stockManager.RemoveStockFromHold(request.SessionId);
+           
+            return true;
+        }
+
+        return false;
     }
 
     public string CreateOrderReference()
@@ -75,8 +79,8 @@ public class CreateOrder
         // Random 12 character string
         string orderReference;
         do {
-            orderReference = Guid.NewGuid().ToString().Substring(0, 12);
-        } while (_ctx.Orders.Any(x => x.OrderReference == orderReference));
+            orderReference = Guid.NewGuid().ToString()[..12];
+        } while (_orderManager.OrderReferenceExists(orderReference));
         return orderReference;
         
     }

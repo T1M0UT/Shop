@@ -6,8 +6,28 @@
 }
 
 <div id="app" class="container">
-    <input class="input" v-model="username"/>
-    <button class="button is-success" @@click="createUser()">Create</button>
+    <div class="level">
+        <div class="level-item">
+            <table class="table">
+                <tr>
+                    <th>Managers</th>
+                    <th></th>
+                </tr>
+                <tr v-for="(user, index) in users">
+                    <td>{{user.userName}}</td>
+                    <td><a class="clickable" @@click="deleteUser(user.id, index)">Remove</a></td>
+                </tr>
+            </table>
+        </div>
+        <div class="level-item">
+            <div class="container">
+                <label class="label">Create Manager</label>
+                <input class="input" v-model="username"/>
+                <input class="input" v-model="password"/>
+                <button class="button is-success" @@click="createUser()">Create</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 @section Scripts{
