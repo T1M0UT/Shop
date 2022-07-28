@@ -1,9 +1,10 @@
 using System.Security.Claims;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Shop.Database;
-using Shop.Domain.Infrastructure;
-using Shop.UI.Infrastructure;
+using Shop.UI.ValidationContexts;
 using Stripe;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,7 +16,8 @@ builder.Services.AddRazorPages(options =>
 {
     options.Conventions.AuthorizeFolder("/Admin");
     options.Conventions.AuthorizePage("/Admin/ConfigureUsers", "Admin");
-});
+}).AddFluentValidation();
+
 builder.Services.AddDbContext<ApplicationDbContext>(options => 
     options.UseSqlServer(
         builder.Configuration["DefaultConnection"]
@@ -27,6 +29,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
         options.Password.RequiredLength = 8;
         options.Password.RequireNonAlphanumeric = false;
         options.Password.RequireUppercase = false;
+        options.Password.RequireLowercase = false;
     })
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
@@ -38,12 +41,15 @@ builder.Services.ConfigureApplicationCookie(options =>
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("Admin", policy => policy.RequireClaim("Role", "Admin"));
-    //options.AddPolicy("Manager", policy => policy.RequireClaim("Role", "Manager"));
+    
     options.AddPolicy("Manager", policy => policy
         .RequireAssertion(context => 
             context.User.HasClaim("Role", "Admin")
             || context.User.HasClaim("Role", "Manager")));
 });
+
+builder.Services.AddValidatorsFromAssemblyContaining<Program>();
+// builder.Services.AddTransient<IValidator<AddCustomerInformation.Request>, AddCustomerInformationRequestValidation>();
 
 builder.Services.AddSession(options =>
 {
@@ -71,34 +77,32 @@ app.UseStaticFiles();
 
 try
 {
-    using (var scope = app.Services.CreateScope())
+    using var scope = app.Services.CreateScope();
+    var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+
+    context.Database.EnsureCreated();
+
+    if (!context.Users.Any())
     {
-        var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-        var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
-
-        context.Database.EnsureCreated();
-
-        if (!context.Users.Any())
+        var adminUser = new IdentityUser
         {
-            var adminUser = new IdentityUser
-            {
-                UserName = "Admin",
-            };
+            UserName = "Admin",
+        };
 
-            var managerUser = new IdentityUser
-            {
-                UserName = "Manager"
-            };
+        var managerUser = new IdentityUser
+        {
+            UserName = "Manager"
+        };
 
-            userManager.CreateAsync(adminUser, "password").GetAwaiter().GetResult();
-            userManager.CreateAsync(managerUser, "password").GetAwaiter().GetResult();
+        userManager.CreateAsync(adminUser, "password").GetAwaiter().GetResult();
+        userManager.CreateAsync(managerUser, "password").GetAwaiter().GetResult();
             
-            var adminClaim = new Claim("Role", "Admin");
-            var managerClaim = new Claim("Role", "Manager");
+        var adminClaim = new Claim("Role", "Admin");
+        var managerClaim = new Claim("Role", "Manager");
             
-            userManager.AddClaimAsync(adminUser, adminClaim).GetAwaiter().GetResult();
-            userManager.AddClaimAsync(managerUser, managerClaim).GetAwaiter().GetResult();
-        }
+        userManager.AddClaimAsync(adminUser, adminClaim).GetAwaiter().GetResult();
+        userManager.AddClaimAsync(managerUser, managerClaim).GetAwaiter().GetResult();
     }
 } catch(Exception ex)
 {
@@ -113,11 +117,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
-
-// app.MapControllerRoute(
-//     name: "default",
-//     pattern: "{controller=Admin}/{action=Index}/{id?}");
 
 app.MapRazorPages();
 app.Run();

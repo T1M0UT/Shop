@@ -1,10 +1,9 @@
 {
   "version": 2,
-  "dgSpecHash": "EQrEPXMzWJj8wWz8ETV9xx2BMrWI9G0orMTiTXVsRTFR1QnJ9qg9NX+mc9RZ9ZUHk3307gB/RS99pLSoWFwV/w==",
+  "dgSpecHash": "qa3NZosx9beKth5GOjfsH/TXheVDh2EAxV/kN1EYPUZBcsq8VWE/+tXOZxd/tBU2/s/HWDguZzMUG+1dhEUkPA==",
   "success": true,
   "projectFilePath": "/Users/tymur/RiderProjects/BonsaiShop/Shop.Database/Shop.Database.csproj",
   "expectedPackageFiles": [
-    "/Users/tymur/.nuget/packages/humanizer.core/2.8.26/humanizer.core.2.8.26.nupkg.sha512",
     "/Users/tymur/.nuget/packages/microsoft.aspnetcore.cryptography.internal/6.0.6/microsoft.aspnetcore.cryptography.internal.6.0.6.nupkg.sha512",
     "/Users/tymur/.nuget/packages/microsoft.aspnetcore.cryptography.keyderivation/6.0.6/microsoft.aspnetcore.cryptography.keyderivation.6.0.6.nupkg.sha512",
     "/Users/tymur/.nuget/packages/microsoft.aspnetcore.identity.entityframeworkcore/6.0.6/microsoft.aspnetcore.identity.entityframeworkcore.6.0.6.nupkg.sha512",
@@ -14,7 +13,6 @@
     "/Users/tymur/.nuget/packages/microsoft.entityframeworkcore/6.0.6/microsoft.entityframeworkcore.6.0.6.nupkg.sha512",
     "/Users/tymur/.nuget/packages/microsoft.entityframeworkcore.abstractions/6.0.6/microsoft.entityframeworkcore.abstractions.6.0.6.nupkg.sha512",
     "/Users/tymur/.nuget/packages/microsoft.entityframeworkcore.analyzers/6.0.6/microsoft.entityframeworkcore.analyzers.6.0.6.nupkg.sha512",
-    "/Users/tymur/.nuget/packages/microsoft.entityframeworkcore.design/6.0.6/microsoft.entityframeworkcore.design.6.0.6.nupkg.sha512",
     "/Users/tymur/.nuget/packages/microsoft.entityframeworkcore.relational/6.0.6/microsoft.entityframeworkcore.relational.6.0.6.nupkg.sha512",
     "/Users/tymur/.nuget/packages/microsoft.entityframeworkcore.sqlserver/6.0.6/microsoft.entityframeworkcore.sqlserver.6.0.6.nupkg.sha512",
     "/Users/tymur/.nuget/packages/microsoft.extensions.caching.abstractions/6.0.0/microsoft.extensions.caching.abstractions.6.0.0.nupkg.sha512",

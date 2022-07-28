@@ -13,7 +13,7 @@ public interface IStockManager
 
     Stock? GetStockWithProduct(int stockId);
     bool EnoughStock(int stockId, int quantity);
-    Task PutStockOnHold(int stockId, int quantity, string sessionId);
+    Task<int> PutStockOnHold(int stockId, int quantity, string sessionId);
    
     Task RetrieveExpiredStockOnHold();
 }

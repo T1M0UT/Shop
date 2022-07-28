@@ -19,6 +19,7 @@ var app = new Vue({
              axios.post("/Cart/AddOne/" + stockId)
                 .then(res => {
                     this.products[id].quantity += 1;
+                    this.updateCart()
                 })
                 .catch(err => {
                     alert("Not enough stock");
@@ -38,6 +39,7 @@ var app = new Vue({
                     if(this.products[id].quantity <= 0){
                         this.products.splice(id, 1);
                     }
+                    this.updateCart()
                 })
                 .catch(err => {
                     alert(err.error);
@@ -51,6 +53,14 @@ var app = new Vue({
                 .catch(err => {
                     console.log(err.message)
                 })
+        },
+        updateCart() {
+            axios.get('/Cart/GetCartComponent')
+                .then(res => {
+                    let html = res.data;
+                    let el = document.getElementById('cart-nav');
+                    el.outerHTML = html;
+                });
         }
     },
 })

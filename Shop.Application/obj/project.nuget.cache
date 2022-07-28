@@ -1,10 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "T7fivAe8Um3Ok7g8gTxxYLG57qo3btvNuKEcHtWfmG56TgbqDA6zM3uJ+ZEW87gaGHgnNKb43r/FRt7H9DjByw==",
+  "dgSpecHash": "WJdoFnjrhMHE+qI4yLjDvnElLEt62zN6mQlbEj2h5NXulDFlZjGkltik5S+laa8BX3sENwuVwMO9aEv0yP7+uA==",
   "success": true,
   "projectFilePath": "/Users/tymur/RiderProjects/BonsaiShop/Shop.Application/Shop.Application.csproj",
-  "expectedPackageFiles": [
-    "/Users/tymur/.nuget/packages/system.componentmodel.annotations/5.0.0/system.componentmodel.annotations.5.0.0.nupkg.sha512"
-  ],
+  "expectedPackageFiles": [],
   "logs": []
 }

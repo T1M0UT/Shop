@@ -31,11 +31,11 @@ public class CustomerInformationModel : PageModel
                     FirstName = "Tim",
                     LastName = "K",
                     Email = "email@email.com",
-                    PhoneNumber = "1",
+                    PhoneNumber = "0671111111",
                     Address1 = "-",
                     Address2 = "-",
                     City = "-",
-                    PostCode = "*"
+                    PostCode = "01234"
                 };
             }
             return Page();

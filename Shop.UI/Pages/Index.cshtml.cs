@@ -9,8 +9,8 @@ public class IndexModel : PageModel
 {
     public IEnumerable<GetProducts.ProductViewModel> Products {get; set; }
 
-    public void OnGet([FromServices] GetProducts getProducts)
+    public async Task OnGet([FromServices] GetProducts getProducts)
     {
-        Products = getProducts.Do();
+        Products = await getProducts.DoAsync();
     }
 }

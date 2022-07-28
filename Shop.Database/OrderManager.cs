@@ -34,10 +34,11 @@ public class OrderManager : IOrderManager
         Func<Order, TResult> selector)
     {
         return _ctx.Orders
-            .Where(x => condition(x))
             .Include(x => x.OrderStocks)
                 .ThenInclude(x => x.Stock)
                     .ThenInclude(x => x.Product)
+            .ToList()
+            .Where(condition)
             .Select(selector)
             .FirstOrDefault();
     }

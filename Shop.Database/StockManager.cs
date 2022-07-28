@@ -38,6 +38,7 @@ public class StockManager : IStockManager
     public Task RemoveStockFromHold(int stockId, int quantity, string sessionId)
     {
         var stockOnHold = _ctx.StocksOnHold
+            .ToList()
             .FirstOrDefault(x => x.StockId == stockId
                                  && x.SessionId == sessionId);
 
@@ -57,7 +58,6 @@ public class StockManager : IStockManager
     public Task RemoveStockFromHold(string sessionId)
     {
         var stockOnHold = _ctx.StocksOnHold
-            .ToList()
             .Where(x => x.SessionId == sessionId)
             .ToList();
         
@@ -75,19 +75,25 @@ public class StockManager : IStockManager
 
     public bool EnoughStock(int stockId, int quantity)
     {
-        return _ctx.Stocks
-            .FirstOrDefault(x => x.Id == stockId).Quantity >= quantity;
+        var stock = _ctx.Stocks
+            .FirstOrDefault(x => x.Id == stockId);
+        
+        if (stock is null)
+            return false;
+        
+        return stock.Quantity >= quantity;
     }
 
-    public Task PutStockOnHold(int stockId, int quantity, string sessionId)
+    public Task<int> PutStockOnHold(int stockId, int quantity, string sessionId)
     {
-        var stockOnHold = _ctx.StocksOnHold.FirstOrDefault(x => x.StockId == stockId);
+        var stockOnHold = _ctx.StocksOnHold.FirstOrDefault(x => x.StockId == stockId 
+                                                                && x.SessionId == sessionId);
+        
+        var stockToHold = _ctx.Stocks.FirstOrDefault(x => x.Id == stockId);
+        if (stockToHold != null) stockToHold.Quantity -= quantity;
 
         var expiryDate = DateTime.Now.AddMinutes(20);
-
-        var stockToHold = _ctx.Stocks.FirstOrDefault(x => x.Id == stockId);
-        stockToHold.Quantity -= quantity;
-
+        
         if (stockOnHold != null)
         {
             stockOnHold!.Quantity += quantity;
@@ -118,23 +124,21 @@ public class StockManager : IStockManager
     {
         var stocksOnHold = _ctx.StocksOnHold.ToList().Where(x => x.ExpiryDate < DateTime.Now).ToList();
 
-        if (stocksOnHold.Count > 0)
+        if (stocksOnHold.Count <= 0) 
+            return Task.CompletedTask;
+        
+        var stockToReturn = _ctx.Stocks
+            .ToList()
+            .Where(x => stocksOnHold.Any(y => y.StockId == x.Id))
+            .ToList();
+
+        foreach (var stock in stockToReturn)
         {
-            var stockToReturn = _ctx.Stocks
-                .ToList()
-                .Where(x => stocksOnHold.Any(y => y.StockId == x.Id))
-                .ToList();
-
-            foreach (var stock in stockToReturn)
-            {
-                stock.Quantity += stocksOnHold.FirstOrDefault(x => x.StockId == stock.Id)!.Quantity;
-            }
-            
-            _ctx.StocksOnHold.RemoveRange(stocksOnHold);
-
-            return _ctx.SaveChangesAsync();
+            stock.Quantity += stocksOnHold.FirstOrDefault(x => x.StockId == stock.Id)!.Quantity;
         }
+        
+        _ctx.StocksOnHold.RemoveRange(stocksOnHold);
 
-        return Task.CompletedTask;
+        return _ctx.SaveChangesAsync();
     }
 }

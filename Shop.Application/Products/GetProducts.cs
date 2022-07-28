@@ -5,23 +5,31 @@ namespace Shop.Application.Products;
 [Service]
 public class GetProducts
 {
+    private readonly IStockManager _stockManager;
     private readonly IProductManager _productManager;
 
-    public GetProducts(IProductManager productManager)
+    public GetProducts(
+        IStockManager stockManager,
+        IProductManager productManager)
     {
+        _stockManager = stockManager;
         _productManager = productManager;
     }
 
-    public IEnumerable<ProductViewModel> Do() =>
-        _productManager.GetProductsWithStock(p => new ProductViewModel
-            {
-                Name = p.Name,
-                Description = p.Description,
-                Price = p.Price.GetPriceString(),
-                
-                StockCount = p.Stock.Sum(y => y.Quantity)
-            });
-    
+    public async Task<IEnumerable<ProductViewModel>> DoAsync()
+    {
+        await _stockManager.RetrieveExpiredStockOnHold();
+        
+        return _productManager.GetProductsWithStock(p => new ProductViewModel
+        {
+            Name = p.Name,
+            Description = p.Description,
+            Price = p.Price.GetPriceString(),
+
+            StockCount = p.Stock.Sum(y => y.Quantity)
+        });
+    }
+
     public class ProductViewModel
     {
         public string Name { get; set; }

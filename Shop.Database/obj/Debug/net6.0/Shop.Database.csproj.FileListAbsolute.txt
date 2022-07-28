@@ -12,6 +12,4 @@
 /Users/tymur/RiderProjects/BonsaiShop/Shop.Database/obj/Debug/net6.0/Shop.Database.dll
 /Users/tymur/RiderProjects/BonsaiShop/Shop.Database/obj/Debug/net6.0/ref/Shop.Database.dll
 /Users/tymur/RiderProjects/BonsaiShop/Shop.Database/obj/Debug/net6.0/Shop.Database.pdb
-/Users/tymur/RiderProjects/BonsaiShop/Shop.Database/bin/Debug/net6.0/Shop.Database.runtimeconfig.json
-/Users/tymur/RiderProjects/BonsaiShop/Shop.Database/obj/Debug/net6.0/Shop.Database.genruntimeconfig.cache
 /Users/tymur/RiderProjects/BonsaiShop/Shop.Database/obj/Debug/net6.0/refint/Shop.Database.dll

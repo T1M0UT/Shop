@@ -1,15 +1,14 @@
-using System.Collections;
-using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using Shop.Domain.Infrastructure;
 using Shop.Domain.Models;
-using System.Linq;
 
 namespace Shop.UI.Infrastructure;
 
 public class SessionManager : ISessionManager
 {
     private readonly ISession _session;
+    private const string KeyCart = "cart";
+    private const string KeyCustomerInformation = "customer-info";
 
     public SessionManager(IHttpContextAccessor httpContextAccessor)
     {
@@ -21,7 +20,7 @@ public class SessionManager : ISessionManager
     public void AddProduct(CartProduct cartProduct)
     {
         var cartList = new List<CartProduct>();
-        var stringObject = _session.GetString("cart");
+        var stringObject = _session.GetString(KeyCart);
         
         if (!string.IsNullOrEmpty(stringObject))
         {
@@ -39,19 +38,18 @@ public class SessionManager : ISessionManager
         
         stringObject = JsonConvert.SerializeObject(cartList);
         
-        _session.SetString("cart", stringObject);
+        _session.SetString(KeyCart, stringObject);
 
     }
 
     public bool RemoveProduct(int stockId, int quantity)
     {
-        var cartList = new List<CartProduct>();
-        var stringObject = _session.GetString("cart");
+        var stringObject = _session.GetString(KeyCart);
 
         if (string.IsNullOrEmpty(stringObject))
             return false;
 
-        cartList = JsonConvert.DeserializeObject<List<CartProduct>>(stringObject);
+        var cartList = JsonConvert.DeserializeObject<List<CartProduct>>(stringObject);
 
         if (!(cartList!.Any(x => x.StockId == stockId)))
             return false;
@@ -64,15 +62,13 @@ public class SessionManager : ISessionManager
         }
         
         stringObject = JsonConvert.SerializeObject(cartList);
-        _session.SetString("cart", stringObject);
+        _session.SetString(KeyCart, stringObject);
         return true;
     }
 
     public IEnumerable<TResult> GetCart<TResult>(Func<CartProduct, TResult> selector)
     {
-        // TODO: Account for multiple items in the cart
-
-        var stringObject = _session.GetString("cart");
+        var stringObject = _session.GetString(KeyCart);
 
         if (string.IsNullOrEmpty(stringObject))
             return Enumerable.Empty<TResult>();
@@ -86,13 +82,13 @@ public class SessionManager : ISessionManager
     {
         var stringObject = JsonConvert.SerializeObject(customer);
 
-        _session.SetString("customer-info", stringObject);
+        _session.SetString(KeyCustomerInformation, stringObject);
 
     }
 
     public CustomerInformation? GetCustomerInformation()
     {
-        var stringObject = _session.GetString("customer-info");
+        var stringObject = _session.GetString(KeyCustomerInformation);
 
         if (string.IsNullOrEmpty(stringObject))
             return null;
@@ -103,6 +99,6 @@ public class SessionManager : ISessionManager
 
     public void ClearCart()
     {
-        _session.Remove("cart");
+        _session.Remove(KeyCart);
     }
 }

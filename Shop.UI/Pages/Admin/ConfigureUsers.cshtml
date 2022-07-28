@@ -6,8 +6,8 @@
 }
 
 <div id="app" class="container">
-    <div class="level">
-        <div class="level-item">
+    <div class="columns">
+        <div class="column is-4">
             <table class="table">
                 <tr>
                     <th>Managers</th>
@@ -19,11 +19,11 @@
                 </tr>
             </table>
         </div>
-        <div class="level-item">
+        <div class="column is-6">
             <div class="container">
                 <label class="label">Create Manager</label>
-                <input class="input" v-model="username"/>
-                <input class="input" v-model="password"/>
+                <input class="input" v-model="username" placeholder="Username"/>
+                <input class="input" v-model="password" placeholder="Password"/>
                 <button class="button is-success" @@click="createUser()">Create</button>
             </div>
         </div>

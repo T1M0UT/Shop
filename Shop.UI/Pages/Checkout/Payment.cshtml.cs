@@ -11,7 +11,7 @@ namespace BonsaiShop.Pages.Checkout;
 
 public class PaymentModel : PageModel
 {
-    public string PublicKey { get; set; }
+    public string PublicKey { get; }
 
     public PaymentModel(IConfiguration config)
     {

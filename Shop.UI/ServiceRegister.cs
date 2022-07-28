@@ -25,7 +25,8 @@ public static class ServiceRegister
         serviceCollection.AddTransient<IProductManager, ProductManager>();
         serviceCollection.AddTransient<IOrderManager, OrderManager>();
         // serviceCollection.AddTransient<IUserManager, UserManager>();
-        serviceCollection.AddScoped<ISessionManager, SessionManager>();
+        // TODO: Check if it has to be scoped
+        serviceCollection.AddTransient<ISessionManager, SessionManager>();
         
         return serviceCollection;
     }

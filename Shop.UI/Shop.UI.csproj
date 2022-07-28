@@ -8,14 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.7" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
-<!--      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.6">-->
-<!--        <PrivateAssets>all</PrivateAssets>-->
-<!--        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>-->
-<!--      </PackageReference>-->
-      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.6" />
-      <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.6" />
+      <PackageReference Include="FluentValidation.AspNetCore" Version="11.1.2" />
       <PackageReference Include="Stripe.net" Version="39.122.0" />
     </ItemGroup>
 
@@ -23,19 +16,5 @@
       <ProjectReference Include="..\Shop.Application\Shop.Application.csproj" />
       <ProjectReference Include="..\Shop.Database\Shop.Database.csproj" />
     </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="wwwroot\images" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <_ContentIncludedByDefault Remove="Pages\Components\Cart\Default.cshtml" />
-      <_ContentIncludedByDefault Remove="Pages\Components\Cart\Small.cshtml" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <AdditionalFiles Include="Pages\Shared\Components\Cart\Default.cshtml" />
-      <AdditionalFiles Include="Pages\Shared\Components\Cart\Small.cshtml" />
-    </ItemGroup>
-
+    
 </Project>
